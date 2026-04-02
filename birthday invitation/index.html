@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="../project for css and html/style1project.css">
+    <title>Birthday Card</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url("maxresdefault.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background 0.5s;
+        }
+
+        .card {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .title, .message {
+            color: black; /* Text starts as black */
+            transition: color 0.5s;
+        }
+
+        button.btn {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: gold;
+            color: black;
+
+        }
+            button.btn2 {
+                font-size: 18px;
+                padding: 10px 20px;
+                margin-top: 20px;
+                cursor: pointer;
+                border: none;
+                border-radius: 8px;
+                background-color: pink;
+                color: black;
+    
+            }       
+
+        /* Firework style */
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: yellow;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1) translate(0,0); opacity: 1; }
+            100% { transform: scale(0) translate(var(--x), var(--y)); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card" id="card">
+   <h1 class="title">🎂 Happy Birthday Mohammed 🎉</h1>
+   <p class="message">Wishing for you a day filled with love, fun, and happiness 💖</p>
+
+   <button class="btn" onclick="activateplackscreen()">Celebrate 🎁</button>
+   <button class="btn2" onclick="activatebigbirthdaycake()">Celebrate2 🎁</button>
+   <!-- 🎵 Audio -->
+   <audio id="birthdayMusic" src="happy-birthday.mp3"></audio>
+</div>
+
+<script>
+function playMusic() {
+    document.getElementById("birthdayMusic").play();
+}
+
+function activateplackscreen() {
+    // Change background to black
+    document.body.style.background = 'black';
+
+    // Change text color to white
+    document.querySelectorAll('.title, .message').forEach(el => {
+        el.style.color = 'white';
+        
+    });
+
+    // Play music
+    playMusic();
+
+    // Create fireworks on click
+    document.body.addEventListener('click', createFireworks);
+}
+
+// Firework effect
+function createFireworks(e) {
+    for (let i = 0; i < 30; i++) {
+        let firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = e.clientX + 'px';
+        firework.style.top = e.clientY + 'px';
+        let angle = Math.random() * 2 * Math.PI;
+        let distance = Math.random() * 100 + 50;
+        firework.style.setProperty('--x', distance * Math.cos(angle) + 'px');
+        firework.style.setProperty('--y', distance * Math.sin(angle) + 'px');
+        document.body.appendChild(firework);
+
+        setTimeout(() => {
+            firework.remove();
+        }, 1000);
+    }
+}
+function activatebigbirthdaycake() {
+    // Change background to big birthday cake image
+    document.body.style.background = "url('screenshot 2026-04-01 052401.png')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+}
+
+</script>
+
+</body>
+</html>
